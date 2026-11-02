@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4_fox1 | Gojo Satoru King</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ff1a2e;--bg:#000;--card:#0b0b0d;--txt:#f2f2f2;--mut:#9a9aa3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Tajawal',sans-serif;overflow-x:hidden;line-height:1.8}
+h1,h2,h3,.en{font-family:'Montserrat',sans-serif}
+
+/* Glow + Grain + Scanlines */
+.glow{position:fixed;border-radius:50%;filter:blur(110px);background:var(--red);opacity:.35;z-index:0;pointer-events:none;transition:transform .2s ease-out}
+.g1{width:420px;height:420px;top:-120px;right:-100px}
+.g2{width:360px;height:360px;bottom:-120px;left:-100px;opacity:.28}
+.g3{width:260px;height:260px;top:45%;left:40%;opacity:.15}
+.grain,.scan{position:fixed;inset:0;pointer-events:none;z-index:50}
+.grain{opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:gr .6s steps(3) infinite}
+@keyframes gr{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}100%{transform:translate(0,0)}}
+.scan{background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
+
+section,header,footer{position:relative;z-index:2}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}
+
+/* Nav */
+nav{position:fixed;top:0;width:100%;z-index:60;backdrop-filter:blur(10px);background:rgba(0,0,0,.6);border-bottom:1px solid #1a1a1a}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+nav b{color:var(--red);letter-spacing:2px}
+nav a{color:var(--txt);text-decoration:none;margin-inline-start:18px;font-size:.95rem}
+nav a:hover{color:var(--red)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:60px}
+.hero h1{font-size:clamp(3.2rem,16vw,10rem);font-weight:900;color:transparent;-webkit-text-stroke:2px var(--red);text-shadow:0 0 40px rgba(255,26,46,.55);letter-spacing:2px;direction:ltr;animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}94%{opacity:.6}96%{opacity:1}98%{opacity:.7}}
+.hero p{max-width:620px;margin:18px auto 30px;color:var(--mut);font-size:1.15rem}
+.tag{display:inline-block;border:1px solid var(--red);color:var(--red);padding:2px 14px;border-radius:50px;font-size:.85rem;margin-bottom:14px}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:50px;text-decoration:none;font-weight:700;color:#fff;border:1px solid var(--red);background:transparent;cursor:pointer;font:700 1rem 'Tajawal';transition:.3s}
+.btn.fill{background:var(--red);box-shadow:0 0 25px rgba(255,26,46,.6)}
+.btn:hover{transform:translateY(-4px);box-shadow:0 0 35px rgba(255,26,46,.8)}
+.btn svg{width:22px;height:22px;fill:currentColor;transition:.4s}
+.btn.yt:hover svg{transform:scale(1.3) rotate(-10deg);animation:pulse .6s}
+.btn.tg:hover svg{transform:translate(-4px,-4px) rotate(-15deg) scale(1.2)}
+@keyframes pulse{50%{transform:scale(1.5)}}
+
+/* Sections */
+.sec{padding:90px 0}
+.sec h2{font-size:clamp(1.8rem,5vw,2.8rem);text-align:center;margin-bottom:10px}
+.sec h2 span{color:var(--red)}
+.sub{text-align:center;color:var(--mut);margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid #1d1d22;border-radius:16px;padding:26px;transition:.35s}
+.card:hover{border-color:var(--red);box-shadow:0 0 30px rgba(255,26,46,.25);transform:translateY(-6px)}
+.card h3{color:var(--red);margin-bottom:8px;font-size:1.1rem}
+.card p{color:var(--mut)}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* Anime */
+.player{background:#000;border:1px solid var(--red);border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(255,26,46,.3);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--mut)}
+.player iframe,.player video{width:100%;height:100%;border:0}
+.now{margin:14px 0 24px;font-weight:700}
+.eps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ep{background:var(--card);border:1px solid #1d1d22;border-radius:12px;padding:14px;cursor:pointer;transition:.3s;text-align:center}
+.ep:hover,.ep.on{border-color:var(--red);background:#150508}
+.ep small{display:block;color:var(--mut)}
+.animes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+.chip{padding:8px 18px;border-radius:50px;border:1px solid #2a2a30;cursor:pointer;color:var(--txt);background:none;font:400 .95rem 'Tajawal'}
+.chip.on{background:var(--red);border-color:var(--red)}
+
+/* AI chat */
+.chat{max-width:700px;margin:auto;background:var(--card);border:1px solid #1d1d22;border-radius:18px;overflow:hidden}
+.msgs{height:300px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.95rem}
+.m.bot{background:#1a1a1f;align-self:flex-start}
+.m.me{background:var(--red);align-self:flex-end}
+.inp{display:flex;border-top:1px solid #1d1d22}
+.inp input{flex:1;background:none;border:0;color:#fff;padding:15px;font:400 1rem 'Tajawal';outline:none}
+.inp button{background:var(--red);border:0;color:#fff;padding:0 24px;cursor:pointer;font:700 1rem 'Tajawal'}
+
+footer{text-align:center;padding:40px 20px;color:var(--mut);border-top:1px solid #151515}
+@media(max-width:600px){nav a:not(.keep){display:none}}
+</style>
+</head>
+<body>
+<div class="glow g1" data-s="30"></div>
+<div class="glow g2" data-s="-40"></div>
+<div class="glow g3" data-s="20"></div>
+<div class="grain"></div><div class="scan"></div>
+
+<nav><div class="wrap">
+  <b class="en">4_FOX1</b>
+  <div><a href="#anime" class="keep">الأنمي</a><a href="#ai" class="keep">الذكاء الاصطناعي</a><a href="#about">القناة</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="tag">👑 GOJO SATORU KING</span>
+  <h1>4_FOX1</h1>
+  <p>قناة متخصصة في فنون المونتاج وتحرير الفيديو، ومعاها موقع أنمي خاص بجروب Gojo Satoru King — حلقات، مشاهدة مباشرة، ومساعد ذكاء اصطناعي.</p>
+  <div class="btns">
+    <a class="btn fill yt" id="ytLink" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+      قناة اليوتيوب</a>
+    <a class="btn tg" id="tgLink" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M9.8 15.3l-.4 5.6c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1L24 3.6c.4-1.6-.6-2.2-1.6-1.8L1.3 9.9c-1.5.6-1.5 1.4-.3 1.8l5.4 1.7L19 5.5c.6-.4 1.1-.2.7.2L9.8 15.3z"/></svg>
+      تحميل الملحقات (تيليجرام)</a>
+    <a class="btn" href="#anime">▶ شاهد الأنمي</a>
+  </div>
+</div></header>
+
+<section class="sec" id="about"><div class="wrap">
+  <h2 class="rv">محتوى <span>القناة</span></h2>
+  <p class="sub rv">كل اللي محتاجه عشان تحترف المونتاج</p>
+  <div class="grid">
+    <div class="card rv"><h3>🎬 دروس مونتاج</h3><p>شروحات خطوة بخطوة من الأساسيات للاحتراف.</p></div>
+    <div class="card rv"><h3>🔥 تأثيرات AMV</h3><p>ترانزشن وإيديتات أنمي بطابع سينمائي.</p></div>
+    <div class="card rv"><h3>📦 ملحقات جاهزة</h3><p>Presets وPlugins وتأثيرات تتحمل من التليجرام.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="anime"><div class="wrap">
+  <h2 class="rv">مشاهدة <span>الأنمي</span></h2>
+  <p class="sub rv">اختار الأنمي وبعدين الحلقة</p>
+  <div class="animes" id="animes"></div>
+  <div class="player" id="player">اختار حلقة للمشاهدة</div>
+  <div class="now" id="now"></div>
+  <div class="eps" id="eps"></div>
+</div></section>
+
+<section class="sec" id="ai"><div class="wrap">
+  <h2 class="rv">مساعد <span>الذكاء الاصطناعي</span></h2>
+  <p class="sub rv">اسأله عن ترشيح أنمي أو نصايح مونتاج</p>
+  <div class="chat rv">
+    <div class="msgs" id="msgs"><div class="m bot">أهلاً! أنا مساعد الجروب 👑 اسألني عن أنمي أو مونتاج.</div></div>
+    <div class="inp"><input id="q" placeholder="اكتب سؤالك..."><button id="send">إرسال</button></div>
+  </div>
+</div></section>
+
+<footer>© 2026 <span class="en">4_fox1</span> — Gojo Satoru King 👑</footer>
+
+<script>
+/* ====== الإعدادات: عدّل هنا ====== */
+const CONFIG = {
+  YOUTUBE: "https://youtube.com/@YOUR_CHANNEL",   // حط رابط قناتك
+  TELEGRAM: "https://t.me/YOUR_CHANNEL",          // حط رابط التليجرام
+  AI_ENDPOINT: ""                                  // رابط الباك إند بتاعك للـAI (اختياري)
+};
+/* src = رابط mp4 مباشر أو رابط embed (iframe) من مصدر مرخّص ليك */
+const ANIME = [
+  { name: "Jujutsu Kaisen", eps: [
+    { t: "الحلقة 1", src: "" }, { t: "الحلقة 2", src: "" }, { t: "الحلقة 3", src: "" }
+  ]},
+  { name: "Anime 2", eps: [ { t: "الحلقة 1", src: "" } ] }
+];
+/* ================================ */
+
+ytLink.href = CONFIG.YOUTUBE; tgLink.href = CONFIG.TELEGRAM;
+
+// Scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.15});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Parallax glows
+addEventListener('mousemove', e => {
+  const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+  document.querySelectorAll('.glow').forEach(g => {
+    const s = +g.dataset.s; g.style.transform = `translate(${x*s*3}px,${y*s*3}px)`;
+  });
+});
+
+// Anime
+let cur = 0;
+function renderAnimes(){
+  animes.innerHTML = ANIME.map((a,i)=>`<button class="chip ${i===cur?'on':''}" onclick="cur=${i};renderAnimes()">${a.name}</button>`).join('');
+  eps.innerHTML = ANIME[cur].eps.map((e,i)=>`<div class="ep" onclick="play(${i},this)">${e.t}<small>▶ تشغيل</small></div>`).join('');
+}
+function play(i, el){
+  const e = ANIME[cur].eps[i];
+  document.querySelectorAll('.ep').forEach(x=>x.classList.remove('on')); el.classList.add('on');
+  now.textContent = `${ANIME[cur].name} — ${e.t}`;
+  if(!e.src){ player.innerHTML = 'ضيف رابط الحلقة في ANIME داخل الكود'; return; }
+  player.innerHTML = /\.(mp4|webm)(\?|$)/i.test(e.src)
+    ? `<video src="${e.src}" controls autoplay></video>`
+    : `<iframe src="${e.src}" allowfullscreen allow="autoplay; fullscreen"></iframe>`;
+}
+renderAnimes();
+
+// AI chat
+function add(t, c){ const d=document.createElement('div'); d.className='m '+c; d.textContent=t; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d; }
+async function ask(text){
+  if(CONFIG.AI_ENDPOINT){
+    const r = await fetch(CONFIG.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
+    return (await r.json()).reply;
+  }
+  // ردود محلية بسيطة لحد ما توصّل الباك إند
+  if(/مونتاج|تعديل|ايديت|edit/i.test(text)) return "ابدأ بقص الإيقاع على الموسيقى، واستخدم ترانزشن سريعة وكلر جريدنج داكن مع لمسات حمراء.";
+  if(/ترشيح|انمي|أنمي|اشوف/i.test(text)) return "جرّب: " + ANIME.map(a=>a.name).join(" ، ") + " — شوفهم من قسم المشاهدة فوق.";
+  return "سؤال حلو! اربط الباك إند بتاعك عشان أرد بذكاء كامل.";
+}
+async function send(){
+  const t = q.value.trim(); if(!t) return;
+  add(t,'me'); q.value='';
+  const b = add('...','bot');
+  try{ b.textContent = await ask(t); }catch{ b.textContent = 'حصلت مشكلة في الاتصال.'; }
+}
+send_ = send; document.getElementById('send').onclick = send;
+q.addEventListener('keydown', e => e.key==='Enter' && send());
+</script>
+</body>
+</html>
